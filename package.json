@@ -1,0 +1,101 @@
+{
+    "name": "health-reminder",
+    "displayName": "Health Reminder",
+    "description": "健康提醒—久坐和喝水强制提醒插件",
+    "version": "0.0.1",
+    "publisher": "Immerse",
+    "engines": {
+        "vscode": "^1.100.0"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/yaolifeng0629/reminder"
+    },
+    "icon": "images/logo.png",
+    "categories": [
+        "Other"
+    ],
+    "activationEvents": [
+        "onStartupFinished"
+    ],
+    "main": "./out/extension.js",
+    "contributes": {
+        "configuration": {
+            "title": "Health Reminder",
+            "description": "健康提醒插件配置",
+            "properties": {
+                "healthReminder.sitReminderInterval": {
+                    "type": "number",
+                    "default": 60,
+                    "minimum": 5,
+                    "maximum": 180,
+                    "description": "久坐提醒间隔（分钟）"
+                },
+                "healthReminder.drinkReminderInterval": {
+                    "type": "number",
+                    "default": 45,
+                    "minimum": 5,
+                    "maximum": 120,
+                    "description": "喝水提醒间隔（分钟）"
+                },
+                "healthReminder.enableSitReminder": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "启用久坐提醒"
+                },
+                "healthReminder.enableDrinkReminder": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "启用喝水提醒"
+                },
+                "healthReminder.language": {
+                    "type": "string",
+                    "enum": [
+                        "zh-CN",
+                        "en"
+                    ],
+                    "default": "zh-CN",
+                    "description": "界面语言 / Interface Language",
+                    "enumDescriptions": [
+                        "中文简体",
+                        "English"
+                    ]
+                }
+            }
+        },
+        "commands": [
+            {
+                "command": "healthReminder.resetTimers",
+                "title": "重置所有计时器"
+            },
+            {
+                "command": "healthReminder.showStatus",
+                "title": "显示提醒状态"
+            }
+        ]
+    },
+    "scripts": {
+        "vscode:prepublish": "pnpm run compile",
+        "compile": "tsc -p ./",
+        "watch": "tsc -watch -p ./",
+        "pretest": "pnpm run compile && pnpm run lint",
+        "lint": "eslint src",
+        "test": "node ./out/test/runTest.js"
+    },
+    "devDependencies": {
+        "@types/vscode": "^1.100.0",
+        "@types/mocha": "^10.0.10",
+        "@types/node": "20.x",
+        "@typescript-eslint/eslint-plugin": "^8.31.1",
+        "@typescript-eslint/parser": "^8.31.1",
+        "eslint": "^9.25.1",
+        "typescript": "^5.8.3",
+        "@vscode/test-cli": "^0.0.10",
+        "@vscode/test-electron": "^2.5.2",
+        "@types/glob": "^8.1.0",
+        "@types/sinon": "^17.0.4",
+        "glob": "^11.0.2",
+        "mocha": "^10.4.0",
+        "sinon": "^20.0.0"
+    }
+}
